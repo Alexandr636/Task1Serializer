@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{022C05EF-E421-4C31-B179-BE7B58A06F3B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Task1Serializator</RootNamespace>
-    <AssemblyName>Task1Serializator</AssemblyName>
+    <ProjectGuid>{D8888965-79AE-47BB-8F18-FF01F847439D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ContactSerialiserLibrary</RootNamespace>
+    <AssemblyName>ContactSerialiserLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,10 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <AssemblyOriginatorKeyFile>KeyFile.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -49,21 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\MaxLenghtAttribute.cs" />
-    <Compile Include="Attributes\MinBirhtDateAttribute.cs" />
-    <Compile Include="Attributes\PhoneNumberRegexAttribute.cs" />
-    <Compile Include="Attributes\SerializableAttribute.cs" />
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Enums\Gender.cs" />
-    <Compile Include="Enums\TypeOfAddress.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Contact.cs" />
+    <Compile Include="ContactSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="KeyFile.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="some.txt" />
+    <ProjectReference Include="..\Task1Serializator\Task1Serializator.csproj">
+      <Project>{022c05ef-e421-4c31-b179-be7b58a06f3b}</Project>
+      <Name>Task1Serializator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

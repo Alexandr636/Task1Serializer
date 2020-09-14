@@ -45,7 +45,7 @@ namespace Task1Serializator.Models
 
 		public override string ToString()
 		{
-			return $"{{ Country : {Country}, City : {City}, CityAddress : {CityAddress} }} ";
+			return $"{{ Country : {Country}, City : {City}, CityAddress : {CityAddress}, AddressType : {AddressType} }} ";
 		}
 
 		public override int GetHashCode()

@@ -1,6 +1,9 @@
-﻿namespace Task1Serializator.Attributes
+﻿using System;
+
+namespace Task1Serializator.Attributes
 {
-	public sealed class MaxLengthAttribute : System.Attribute
+	[AttributeUsage(AttributeTargets.Property)]
+	public sealed class MaxLengthAttribute : Attribute
 	{
 		public uint MaxLength
 		{
