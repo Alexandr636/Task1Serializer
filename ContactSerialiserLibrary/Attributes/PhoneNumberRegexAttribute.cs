@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Task1Serializator.Attributes
+namespace ContactSerialiserLibrary.Attributes
 {
 	public sealed class PhoneNumberRegexAttribute : System.Attribute
 	{

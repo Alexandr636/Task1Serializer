@@ -31,10 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>KeyFile.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
@@ -50,18 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contact.cs" />
-    <Compile Include="ContactSerializer.cs" />
+    <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Enums\TypeOfAddress.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Serializers\ContactSerializer.cs" />
+    <Compile Include="Attributes\MaxLenghtAttribute.cs" />
+    <Compile Include="Attributes\MinBirhtDateAttribute.cs" />
+    <Compile Include="Attributes\PhoneNumberRegexAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="KeyFile.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Task1Serializator\Task1Serializator.csproj">
-      <Project>{022c05ef-e421-4c31-b179-be7b58a06f3b}</Project>
-      <Name>Task1Serializator</Name>
-    </ProjectReference>
+    <Compile Include="Attributes\SerializableAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

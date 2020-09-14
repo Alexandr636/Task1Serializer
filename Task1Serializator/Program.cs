@@ -1,6 +1,7 @@
 ﻿using System;
-using Task1Serializator.Models;
-using Task1Serializator.Enums;
+using ContactSerialiserLibrary.Serializers;
+using ContactSerialiserLibrary.Enums;
+using ContactSerialiserLibrary.Models;
 
 namespace Task1Serializator
 {
@@ -20,8 +21,9 @@ namespace Task1Serializator
 
 			//var contactSerializer = new ContactSerializer(@"C:\Users\Admin\Desktop\Новый.txt");
 			var contactSerializer = new ContactSerializer();
-			contactSerializer.Serialize(contact);
-			//contactSerializer.Deserialize("Contact.txt");
+			var contactsArray = new Contact[] { contact, contact1 };
+			contactSerializer.Serialize(contactsArray);
+			//var a = contactSerializer.Deserialize("Contact.txt");
 
 			Console.ReadKey();
 		}

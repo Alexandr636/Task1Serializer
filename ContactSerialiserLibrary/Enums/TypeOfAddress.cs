@@ -1,4 +1,4 @@
-﻿namespace Task1Serializator.Enums
+﻿namespace ContactSerialiserLibrary.Enums
 {
     public enum TypeOfAddress
     {

@@ -1,25 +1,25 @@
-﻿using Task1Serializator.Enums;
+﻿using ContactSerialiserLibrary.Enums;
 
-namespace Task1Serializator.Models
+namespace ContactSerialiserLibrary.Models
 {
-    public sealed class Address
-    {
-        public string Country
+	public sealed class Address
+	{
+		public string Country
 		{
 			get; set;
 		}
 
-        public string City
+		public string City
 		{
 			get; set;
 		}
 
-        public string CityAddress
+		public string CityAddress
 		{
 			get; set;
 		}
 
-        public TypeOfAddress AddressType
+		public TypeOfAddress AddressType
 		{
 			get; set;
 		}
@@ -54,4 +54,5 @@ namespace Task1Serializator.Models
 			return stringedAddress.GetHashCode();
 		}
 	}
+	
 }

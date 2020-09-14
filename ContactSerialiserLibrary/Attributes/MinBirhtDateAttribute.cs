@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Task1Serializator.Attributes
+namespace ContactSerialiserLibrary.Attributes
 {
 	public sealed class MinBirthDateAttribute : Attribute
 	{

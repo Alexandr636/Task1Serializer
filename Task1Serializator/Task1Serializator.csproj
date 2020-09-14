@@ -49,13 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\MaxLenghtAttribute.cs" />
-    <Compile Include="Attributes\MinBirhtDateAttribute.cs" />
-    <Compile Include="Attributes\PhoneNumberRegexAttribute.cs" />
-    <Compile Include="Attributes\SerializableAttribute.cs" />
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Enums\Gender.cs" />
-    <Compile Include="Enums\TypeOfAddress.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,6 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="some.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ContactSerialiserLibrary\ContactSerialiserLibrary.csproj">
+      <Project>{d8888965-79ae-47bb-8f18-ff01f847439d}</Project>
+      <Name>ContactSerialiserLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

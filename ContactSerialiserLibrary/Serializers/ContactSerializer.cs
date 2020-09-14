@@ -1,18 +1,17 @@
-﻿using Task1Serializator.Models;
-using System;
+﻿using System;
 using System.IO;
-using Task1Serializator.Enums;
-using System.Reflection;
 using System.Collections.Generic;
+using ContactSerialiserLibrary.Models;
+using ContactSerialiserLibrary.Enums;
 
-namespace Task1Serializator
+namespace ContactSerialiserLibrary.Serializers
 {
 	public class ContactSerializer
 	{
 
 		public ContactSerializer()
 		{
-
+			 
 		}
 
 		/// <summary>
@@ -36,35 +35,30 @@ namespace Task1Serializator
 		/// <param name="person"></param>
 		public void Serialize(Contact person, string fileName = "Contact.txt")
 		{
-			if (CheckFileName(fileName))
-			{
-				//throw new FileLoadException();
-				Console.WriteLine("Файл существует");
-			}
-			else
-			{
-				if (fileName.Length > 3)
-				{
-					byte[] qwe = System.Text.Encoding.Default.GetBytes(person.ToString());
-					WriteInFile(fileName, qwe);
-				}
+			if (CheckFileNameForWriteFile(fileName))
+			{ 
+				byte[] qwe = System.Text.Encoding.Default.GetBytes(person.ToString());
+				WriteInFile(fileName, qwe);
 			}
 		}
 
-		public void Serialize(Contact[] person, string fileName = "Contact.txt")
+		/// <summary>
+		/// Позволяет сериализовать массив Contact[]
+		/// </summary>
+		/// <param name="persons"></param>
+		/// <param name="fileName"></param>
+		public void Serialize(Contact[] persons, string fileName = "Contact.txt")
 		{
-			if (CheckFileName(fileName))
+			if (CheckFileNameForWriteFile(fileName))
 			{
-				throw new FileLoadException();
-			}
-			else
-			{
-				if (fileName.Length > 3)
+				var byteList = new List<byte[]>();
+				foreach (var person in persons)
 				{
-					byte[] qwe = System.Text.Encoding.Default.GetBytes(person.ToString());
-					WriteInFile(fileName, qwe);
+					byteList.Add(System.Text.Encoding.Default.GetBytes(person.ToString()));
 				}
+				WriteListInFile(fileName, byteList);
 			}
+		
 		}
 
 		public Contact Deserialize(string fileName)
@@ -208,12 +202,37 @@ namespace Task1Serializator
 			}
 			return false;
 		}
-		
+
+		private bool CheckFileNameForWriteFile(string fileName)
+		{
+			if (!CheckFileName(fileName))
+			{
+				if (fileName.Length > 3)
+				{
+					return true;
+				}
+			}
+			//throw new FileLoadException();
+			//Console.WriteLine("Файл существует");
+
+			return false;
+		}
+
 		private async void  WriteInFile(string fileName, byte[] bytedText)
 		{
 			using (var fStream = new FileStream(fileName, FileMode.CreateNew))
-			{
+			{ 
 				await fStream.WriteAsync(bytedText, 0, bytedText.Length);
+			}
+			
+		}
+
+		private async void WriteListInFile(string fileName, List<byte[]> byteList)
+		{
+			using (var fStream = new FileStream(fileName, FileMode.CreateNew))
+			{
+				foreach(var byteArray in byteList)
+				await fStream.WriteAsync(byteArray, 0, byteArray.Length);
 			}
 		}
 	}

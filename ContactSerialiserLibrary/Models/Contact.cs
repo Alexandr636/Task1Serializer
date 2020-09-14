@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using Task1Serializator.Attributes;
-using Task1Serializator.Enums;
+﻿using ContactSerialiserLibrary.Attributes;
+using ContactSerialiserLibrary.Enums;
+using System;
 
-namespace Task1Serializator.Models
+
+namespace ContactSerialiserLibrary.Models
 {
     public sealed class Contact : ICloneable
     {
