@@ -22,7 +22,8 @@ namespace Task1Serializator
 			//var contactSerializer = new ContactSerializer(@"C:\Users\Admin\Desktop\Новый.txt");
 			var contactSerializer = new ContactSerializer();
 			var contactsArray = new Contact[] { contact, contact1 };
-			contactSerializer.Serialize(contactsArray);
+			contactSerializer.SerializeToJSON(contactsArray);
+			contactSerializer.SerializeToExcel(contact);
 			//var a = contactSerializer.Deserialize("Contact.txt");
 
 			Console.ReadKey();

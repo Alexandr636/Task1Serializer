@@ -3,67 +3,62 @@ using System.IO;
 using System.Collections.Generic;
 using ContactSerialiserLibrary.Models;
 using ContactSerialiserLibrary.Enums;
+using ContactSerialiserLibrary.Interfaces;
+using ContactSerialiserLibrary.Serializers.ExportTypes;
+//using System.ComponentModel;
 
 namespace ContactSerialiserLibrary.Serializers
 {
 	public class ContactSerializer
 	{
+		//private Container container = new Container();
+		private IFileChecker fileChecker = new FileChecker();
+		private IFileWriter fileWriter = new FileWriter();
 
 		public ContactSerializer()
 		{
-			 
+
 		}
 
 		/// <summary>
 		/// Не понял, что должен делать этот конструктор, кроме как принимать имя файла
 		/// </summary>
 		/// <param name="fileName"></param>
-		public ContactSerializer(string fileName)
-		{
-			if (CheckFileName(fileName))
-			{
-				using (var fStream = new FileStream(fileName, FileMode.Open))
-				{
+		//public ContactSerializer(string fileName)
+		//{
+		//	//container.Add(IFileChecker, "fileChecker");
+		//	if (fileChecker.CheckFileName(fileName))
+		//	{
+		//		using (var fStream = new FileStream(fileName, FileMode.Open))
+		//		{
 
-				}
-			}
+		//		}
+		//	}
+		//}
+
+		public void SerializeToJSON(Contact person, string fileName = "Contact.txt")
+		{
+			IExportToJSON toJSON = new ExportToJSON();
+
+			toJSON.SerializeToJSON(person,fileName);
 		}
 
-		/// <summary>
-		/// Сохраняет сериализованый класс в файл
-		/// </summary>
-		/// <param name="person"></param>
-		public void Serialize(Contact person, string fileName = "Contact.txt")
+		public void SerializeToJSON(Contact[] persons, string fileName = "Contact.txt")
 		{
-			if (CheckFileNameForWriteFile(fileName))
-			{ 
-				byte[] qwe = System.Text.Encoding.Default.GetBytes(person.ToString());
-				WriteInFile(fileName, qwe);
-			}
+			IExportToJSON toJSON = new ExportToJSON();
+
+			toJSON.SerializeToJSON(persons, fileName);
 		}
 
-		/// <summary>
-		/// Позволяет сериализовать массив Contact[]
-		/// </summary>
-		/// <param name="persons"></param>
-		/// <param name="fileName"></param>
-		public void Serialize(Contact[] persons, string fileName = "Contact.txt")
+		public void SerializeToExcel(Contact person, string fileName = "Contact.xlsx")
 		{
-			if (CheckFileNameForWriteFile(fileName))
-			{
-				var byteList = new List<byte[]>();
-				foreach (var person in persons)
-				{
-					byteList.Add(System.Text.Encoding.Default.GetBytes(person.ToString()));
-				}
-				WriteListInFile(fileName, byteList);
-			}
-		
+			IExportToExcel exportToExcel = new ExportToExcel();
+			exportToExcel.SerializeToExcel(person, fileName);
 		}
 
 		public Contact Deserialize(string fileName)
 		{
-			if (CheckFileName(fileName))
+			if (fileChecker.CheckFileName(fileName))
 			{
 				using (var fStream = new FileStream(fileName, FileMode.Open))
 				{
@@ -186,54 +181,5 @@ namespace ContactSerialiserLibrary.Serializers
 			return splitedContact;
 		}
 
-		/// <summary>
-		/// Если файл существует - возвращает true
-		/// </summary>
-		/// <param name="fileName"></param>
-		/// <returns></returns>
-		private bool CheckFileName(string fileName)
-		{
-			if (fileName.Length > 3)
-			{
-				if (File.Exists(fileName))
-				{
-					return true;
-				}
-			}
-			return false;
-		}
-
-		private bool CheckFileNameForWriteFile(string fileName)
-		{
-			if (!CheckFileName(fileName))
-			{
-				if (fileName.Length > 3)
-				{
-					return true;
-				}
-			}
-			//throw new FileLoadException();
-			//Console.WriteLine("Файл существует");
-
-			return false;
-		}
-
-		private async void  WriteInFile(string fileName, byte[] bytedText)
-		{
-			using (var fStream = new FileStream(fileName, FileMode.CreateNew))
-			{ 
-				await fStream.WriteAsync(bytedText, 0, bytedText.Length);
-			}
-			
-		}
-
-		private async void WriteListInFile(string fileName, List<byte[]> byteList)
-		{
-			using (var fStream = new FileStream(fileName, FileMode.CreateNew))
-			{
-				foreach(var byteArray in byteList)
-				await fStream.WriteAsync(byteArray, 0, byteArray.Length);
-			}
-		}
 	}
 }
