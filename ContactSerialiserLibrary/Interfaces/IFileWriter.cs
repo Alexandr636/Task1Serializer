@@ -2,7 +2,7 @@
 
 namespace ContactSerialiserLibrary.Interfaces
 {
-	public interface IFileWriter
+	public interface ISaver
 	{
 		void WriteInFile(string fileName, byte[] bytedText);
 		void WriteListInFile(string fileName, List<byte[]> byteList);

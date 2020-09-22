@@ -5,61 +5,50 @@ using ContactSerialiserLibrary.Models;
 using ContactSerialiserLibrary.Enums;
 using ContactSerialiserLibrary.Interfaces;
 using ContactSerialiserLibrary.Serializers.ExportTypes;
+using SimpleInjector;
+using System.Collections;
 //using System.ComponentModel;
 
 namespace ContactSerialiserLibrary.Serializers
 {
-	public class ContactSerializer
+	public class ContactSerializer : IContactSerializer
 	{
-		//private Container container = new Container();
-		private IFileChecker fileChecker = new FileChecker();
-		private IFileWriter fileWriter = new FileWriter();
+		private Container container = new Container();
+		//private IFileChecker fileChecker = new FileChecker();
+		//private Interfaces.ISaver fileWriter = new Saver();
 
 		public ContactSerializer()
 		{
 
 		}
 
-		/// <summary>
-		/// Не понял, что должен делать этот конструктор, кроме как принимать имя файла
-		/// </summary>
-		/// <param name="fileName"></param>
-		//public ContactSerializer(string fileName)
-		//{
-		//	//container.Add(IFileChecker, "fileChecker");
-		//	if (fileChecker.CheckFileName(fileName))
-		//	{
-		//		using (var fStream = new FileStream(fileName, FileMode.Open))
-		//		{
+		
 
-		//		}
-		//	}
+		//public void SerializeToJSON(Contact person, string fileName = "Contact.txt")
+		//{
+		//	IExportToJSON toJSON = new JSONExporter();
+
+		//	toJSON.SerializeToJSON(person,fileName);
 		//}
 
-		public void SerializeToJSON(Contact person, string fileName = "Contact.txt")
-		{
-			IExportToJSON toJSON = new ExportToJSON();
+		//public void SerializeToJSON(Contact[] persons, string fileName = "Contact.txt")
+		//{
+		//	IExportToJSON toJSON = new JSONExporter(fileChecker,fileWriter);
 
-			toJSON.SerializeToJSON(person,fileName);
-		}
+		//	toJSON.SerializeToJSON(persons, fileName);
+		//}
 
-		public void SerializeToJSON(Contact[] persons, string fileName = "Contact.txt")
-		{
-			IExportToJSON toJSON = new ExportToJSON();
+		//public void SerializeToExcel(Contact person, string fileName = "Contact.xlsx")
+		//{//Export
+		//	IExcelExporter exportToExcel = new ExcelExporter();
+		//	exportToExcel.Serialize(person, fileName);
+		//}
 
-			toJSON.SerializeToJSON(persons, fileName);
-		}
-
-		public void SerializeToExcel(Contact person, string fileName = "Contact.xlsx")
-		{
-			IExportToExcel exportToExcel = new ExportToExcel();
-			exportToExcel.SerializeToExcel(person, fileName);
-		}
 
 		public Contact Deserialize(string fileName)
 		{
-			if (fileChecker.CheckFileName(fileName))
-			{
+			//if (fileChecker.CheckFileName(fileName))
+			//{
 				using (var fStream = new FileStream(fileName, FileMode.Open))
 				{
 					var bytedContact = new byte[fStream.Length];
@@ -68,7 +57,7 @@ namespace ContactSerialiserLibrary.Serializers
 					var contact = TranslateToContact(stringedContact);
 					return contact;
 				}
-			}
+			//}
 			return null;
 		}
 
@@ -180,6 +169,5 @@ namespace ContactSerialiserLibrary.Serializers
 			var splitedContact = stringedContact.Split(',');
 			return splitedContact;
 		}
-
 	}
 }

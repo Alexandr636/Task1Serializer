@@ -2,7 +2,7 @@
 
 namespace ContactSerialiserLibrary.Interfaces
 {
-	public interface IExportToExcel
+	public interface IExcelExporter
 	{
 		void SerializeToExcel(Contact person, string fileName = "Contact.xlsx");
 	}

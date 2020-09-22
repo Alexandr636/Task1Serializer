@@ -1,11 +1,14 @@
 ﻿using ContactSerialiserLibrary.Interfaces;
-using System.ComponentModel;
+using log4net;
 using System.IO;
 
 namespace ContactSerialiserLibrary.Serializers
 {
 	public class FileChecker : IFileChecker
 	{
+		//ConfirationManager
+		//LogManager.GetLogger("LOGGER");
+
 		/// <summary>
 		/// Если файл существует - возвращает true
 		/// </summary>
@@ -15,11 +18,13 @@ namespace ContactSerialiserLibrary.Serializers
 		{
 			if (fileName.Length > 3)
 			{
+				
 				if (File.Exists(fileName))
 				{
 					return true;
 				}
 			}
+			//throw new Exception();
 			return false;
 		}
 
